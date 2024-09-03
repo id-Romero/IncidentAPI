@@ -1,7 +1,5 @@
 name: Docker build & Publish
 
-
-
 on:
   push:
     branches:
@@ -20,5 +18,10 @@ jobs:
         - name: Build Docker image
           run: docker build -t idromero/incidentapi:${{ github.sha }} .
 
+        - name: Tag Docker image
+          run: docker tag idromero/incidentapi:${{ github.sha }} idromero/incidentapi:latest
+
         - name: Push Docker image
-          run: docker push idromero/incidentapi:${{ github.sha }}
+          run: |
+            docker push idromero/incidentapi:${{ github.sha }}
+            docker push idromero/incidentapi:latest
