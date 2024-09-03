@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
     incident-api:
-      image: juanfr97/711-incident-api:latest
+      image: idromero/incidentapi:latest
       container_name: incident-api
       environment:
         PORT: ${PORT}
@@ -22,7 +22,7 @@ services:
       container_name: mongo
       environment:
         MONGO_INITDB_ROOT_USERNAME: root
-        MONGO_INITDB_ROOT_PASSWORD: 12345
+        MONGO_INITDB_ROOT_PASSWORD: root
       ports:
         - "27017:27017"
 
