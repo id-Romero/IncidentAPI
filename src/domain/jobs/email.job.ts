@@ -22,7 +22,7 @@ export const emailJob = () => {
             await Promise.all(
                 Mcase.map(async (Mcase) => {
                     const htmlBody = generateMonkeyCasesEmailTemplate(
-                        Mcase.genre, Mcase.age, Mcase.lat, Mcase.lng,  Mcase.creationDate || new Date()
+                        Mcase.genre, Mcase.age, Mcase.lat, Mcase.lng, Mcase.creationDate || new Date()
                     );
                     await emailService.sendEmail({
                         to: "diego.lopez.ismael@gmail.com",
