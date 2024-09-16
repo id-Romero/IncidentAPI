@@ -11,7 +11,7 @@ export const emailJob = () => {
         console.log('Corriendo cada 10 segundos');
 
         try {
-            const Mcase = await MonkeyCasesModel.find({isEmailSent: false});
+            const Mcase = await MonkeyCasesModel.find({isSent: false});
             if (!Mcase.length) {
                 console.log("No hay casos de viruela del mono pendientes de enviar");
                 return;
