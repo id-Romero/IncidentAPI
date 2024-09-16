@@ -12,6 +12,7 @@ export class MonkeyCasesRoutes{
         router.get("/:id", monkeyCasesController.getMonkeyCaseById);
         router.put("/:id", monkeyCasesController.updateMonkeyCase);
         router.delete("/:id", monkeyCasesController.deleteMonkeyCase);
+        router.get('/monkeycases/lastweek', monkeyCasesController.getMonkeyCasesFromLastWeek);
         return router;
     }
 }
