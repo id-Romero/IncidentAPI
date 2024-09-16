@@ -40,6 +40,19 @@ export class MonkeyCasesController{
         }
     }
 
+    public getMonkeyCasesFromLastWeek = async (req: Request, res: Response) => {
+        try {
+            const oneWeekAgo = new Date();
+            oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+            const casesFromLastWeek = await MonkeyCasesModel.find({
+                creationDate: { $gte: oneWeekAgo }
+            });
+            res.json(casesFromLastWeek);
+        } catch (error) {
+            return res.status(500).json({ message: 'Error obteniendo los datos de la otra semana' });
+        }
+    }
+
     public updateMonkeyCase = async (req:Request, res:Response) => {
         const {id} = req.params;
         const {genre, age, lat, lng, creationDate} = req.body;
