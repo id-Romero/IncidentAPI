@@ -1,37 +1,41 @@
 import cron from 'node-cron';
-import { IncidentModel } from '../../data/models/incident.model';
+import { MonkeyCasesModel } from '../../data/models/monkeycases.model';
 import { EmailService } from '../service/email.service';
-import { IncidentDataSource } from '../datasources/incidentdatasource';
-import { generateIncidentEmailTemplate } from '../templates/email.template';
+import { MonkeyCasesDataSource } from '../datasources/monkeycasesdatasource';
+import { generateMonkeyCasesEmailTemplate } from '../templates/email.template';
 
 export const emailJob = () => {
     const emailService = new EmailService();
-    const incidentDataSource = new IncidentDataSource();
-    cron.schedule('*/5 * * * * *', async () => {
-        console.log('Corriendo cada 5 segundos');
+    const monkeycasesDataSource = new MonkeyCasesDataSource();
+    cron.schedule('*/10 * * * * *', async () => {
+        console.log('Corriendo cada 10 segundos');
 
         try {
-            const incidents = await IncidentModel.find({isEmailSent: false});
-            if (!incidents.length) {
-                console.log("No hay incidentes pendientes de enviar");
+            const Mcase = await MonkeyCasesModel.find({isEmailSent: false});
+            if (!Mcase.length) {
+                console.log("No hay casos de viruela del mono pendientes de enviar");
                 return;
             };
 
-            console.log(`Procesando ${incidents.length} incidentes`);
+            console.log(`Procesando ${Mcase.length} casos de viruela del mono`);
 
             await Promise.all(
-                incidents.map(async (incident) => {
-                    const htmlBody = generateIncidentEmailTemplate(
-                        incident.title, incident.description, incident.lat, incident.lng
+                Mcase.map(async (Mcase) => {
+                    const htmlBody = generateMonkeyCasesEmailTemplate(
+                        Mcase.genre, Mcase.age, Mcase.lat, Mcase.lng,  Mcase.creationDate || new Date()
                     );
                     await emailService.sendEmail({
                         to: "diego.lopez.ismael@gmail.com",
-                        subject: `Incidente: ${incident.description}`,
+                        subject: `Caso de Viruela del Mono: ${Mcase.genre} ${Mcase.age}`,
                         htmlBody: htmlBody
                     });
-                    console.log(`Correo enviado para el incidente con ID: ${incident._id}`);
-                    await incidentDataSource.updateIncident(incident._id.toString(), {...incident, isEmailSent: true});
-                    console.log(`Incidente con ID: ${incident._id} actualizado`);
+                    console.log(`Correo enviado para el caso de viruela del Mono con ID: ${Mcase._id}`);
+                    await monkeycasesDataSource.updateMcase(Mcase._id.toString(), {
+                        ...Mcase.toObject(),
+                        isSent: true,
+                        creationDate: Mcase.creationDate ? new Date(Mcase.creationDate) : undefined
+                    });
+                    console.log(`Caso de viruela del mono con ID: ${Mcase._id} actualizado`);
 
             }));
 

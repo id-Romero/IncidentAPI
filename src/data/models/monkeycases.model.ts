@@ -1,12 +1,12 @@
 import mongoose from 'mongoose';
 
-const incidentSchema = new mongoose.Schema({
-    title: {
+const monkeycasessquema = new mongoose.Schema({
+    genre: {
         type: String,
         required: true
     },
-    description: {
-        type: String,
+    age: {
+        type: Number,
         required: true
     },
     lat:{
@@ -17,11 +17,16 @@ const incidentSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    isEmailSent: {
+    isSent: {
         type: Boolean,
         required: false,
         default: false
+    },
+    creationDate: {
+        type: Date,
+        required: false,
+        default: Date.now
     }
 });
 
-export const IncidentModel = mongoose.model('incident', incidentSchema);
+export const MonkeyCasesModel = mongoose.model('case', monkeycasessquema);

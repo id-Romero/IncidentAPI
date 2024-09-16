@@ -1,9 +1,9 @@
 version: '3.8'
 
 services:
-    incident-api:
-      image: idromero/incidentapi:latest
-      container_name: incident-api
+    monkeycase-api:
+      image: idromero/monkeycase-api:latest
+      container_name: monkeycase-api
       environment:
         PORT: ${PORT}
         MONGO_URL: ${MONGO_URL_DOCKER}

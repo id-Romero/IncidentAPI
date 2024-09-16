@@ -11,9 +11,9 @@ export class MongoDatabase {
             await mongoose.connect(options.mongoUrl, {
                 dbName: options.dbName,
             });
-            console.log('Connected to the database');
+            console.log('Conectado a la base de datos');
         } catch (error) {
-            console.error('Error connecting to the database', error);
+            console.error('Error connectando a la base de datos', error);
         }
     }
 }

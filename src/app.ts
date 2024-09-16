@@ -2,7 +2,7 @@ import express,{Request, Response} from 'express';
 import envs from './config/envs';
 import { mongo } from 'mongoose';
 import { MongoDatabase } from './data/init';
-import { IncidentModel } from './data/models/incident.model';
+import { MonkeyCasesModel } from './data/models/monkeycases.model';
 import { AppRoutes } from './presentation/routes';
 import { emailJob } from './domain/jobs/email.job';
 
@@ -19,7 +19,7 @@ console.log(envs.PORT);
     }))
 ();
 
-app.listen(3000, () => {
+app.listen(3002, () => {
     console.log('Server is running on port 3000');
     emailJob();
 });

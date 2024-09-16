@@ -1,6 +1,6 @@
 import envs from "../../config/envs";
 
-export function generateIncidentEmailTemplate(title: string, description:string, lat: number, lng: number): string {
+export function generateMonkeyCasesEmailTemplate(genre:string, age:number, lat: number, lng: number, creationDate?: Date): string {
     const mapImageURL = generateMapboxStaticImageURL(lat, lng);
     return `
     <!DOCTYPE html>
@@ -8,7 +8,7 @@ export function generateIncidentEmailTemplate(title: string, description:string,
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Detalles del Incidente</title>
+        <title>Detalles del caso de viruela del mono</title>
         <style>
             body {
                 font-family: Arial, sans-serif;
@@ -54,14 +54,15 @@ export function generateIncidentEmailTemplate(title: string, description:string,
     <body>
         <div class="container">
             <div class="header">
-                <h1>Detalles del Incidente</h1>
+                <h1>Detalles del caso de viruela del mono</h1>
             </div>
             <div class="content">
-                <p><strong>Título del Incidente:</strong> ${title}</p>
-                <p><strong>Descripcion del Incidente:</strong> ${description}</p>
+                <p><strong>Genero del caso de viruela del mono:</strong> ${genre}</p>
+                <p><strong>Descripcion del caso de viruela del mono:</strong> ${age}</p>
                 <p><strong>Latitud:</strong> ${lat}</p>
                 <p><strong>Longitud:</strong> ${lng}</p>
-                <img src="${mapImageURL}" alt="Mapa del Incidente" style="display: block; margin: 10px auto;">
+                <p><strong>Fecha de creacion:</strong> ${creationDate}</p>
+                <img src="${mapImageURL}" alt="Mapa del Mcasee" style="display: block; margin: 10px auto;">
             </div>
             <div class="footer">
                 <p>Este es un correo generado automáticamente. Por favor, no responda a este mensaje.</p>

@@ -1,10 +1,10 @@
 import {Router} from 'express';
-import { IncidentRoutes } from './incidents/routes';
+import { MonkeyCasesRoutes } from './MonkeyCases/routes';
 
 export class AppRoutes {
     static get routes() : Router{
         const router = Router();
-        router.use("/api/incidents", IncidentRoutes.routes);
+        router.use("/api/monkeycases", MonkeyCasesRoutes.routes);
         return router
     }
 }

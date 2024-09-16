@@ -16,12 +16,12 @@ jobs:
           run: docker login -u "${{ secrets.DOCKER_USERNAME }}" -p "${{secrets.DOCKER_PASSWORD}}"
 
         - name: Build Docker image
-          run: docker build -t idromero/incidentapi:${{ github.sha }} .
+          run: docker build -t idromero/monkeycase-api:${{ github.sha }} .
 
         - name: Tag Docker image
-          run: docker tag idromero/incidentapi:${{ github.sha }} idromero/incidentapi:latest
+          run: docker tag idromero/monkeycase-api:${{ github.sha }} idromero/monkeycase-api:latest
 
         - name: Push Docker image
           run: |
-            docker push idromero/incidentapi:${{ github.sha }}
-            docker push idromero/incidentapi:latest
+            docker push idromero/monkeycase-api:${{ github.sha }}
+            docker push idromero/monkeycase-api:latest
